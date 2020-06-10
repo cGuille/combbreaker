@@ -31,8 +31,8 @@ impl Combination {
         count
     }
 
-    pub fn pieces(&self) -> std::iter::Enumerate<std::slice::Iter<u8>> {
-        self.pieces.iter().enumerate()
+    pub fn pieces(&self) -> &Vec<u8> {
+        &self.pieces
     }
 
     pub fn piece(&self, pos: usize) -> u8 {
@@ -40,7 +40,7 @@ impl Combination {
     }
 
     pub fn position(&self, searched_piece: &u8, ignored_pos: &HashSet<usize>) -> Option<usize> {
-        for (pos, piece) in self.pieces() {
+        for (pos, piece) in self.pieces.iter().enumerate() {
             if piece == searched_piece && !ignored_pos.contains(&pos) {
                 return Some(pos);
             }
@@ -111,8 +111,8 @@ mod tests {
         let pieces = [1, 2, 3];
         let combination = Combination::from_slice(&pieces);
 
-        let expected: Vec<(usize, &u8)> = pieces.iter().enumerate().collect();
-        let actual: Vec<(usize, &u8)> = combination.pieces().collect();
+        let expected: Vec<&u8> = pieces.iter().collect();
+        let actual: Vec<&u8> = combination.pieces().iter().collect();
 
         assert_eq!(expected, actual);
     }

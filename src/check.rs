@@ -18,7 +18,7 @@ pub fn check(guess: &Combination, reference: &Combination) -> GuessResult {
     let mut used_guess_pieces = HashSet::new();
     let mut used_reference_pieces = HashSet::new();
 
-    for (pos, piece) in guess.pieces() {
+    for (pos, piece) in guess.pieces().iter().enumerate() {
         if piece == &reference.piece(pos) {
             used_guess_pieces.insert(pos);
             used_reference_pieces.insert(pos);
@@ -26,7 +26,7 @@ pub fn check(guess: &Combination, reference: &Combination) -> GuessResult {
         }
     }
 
-    for (pos, piece) in guess.pieces() {
+    for (pos, piece) in guess.pieces().iter().enumerate() {
         if used_guess_pieces.contains(&pos) {
             continue;
         }
@@ -41,7 +41,7 @@ pub fn check(guess: &Combination, reference: &Combination) -> GuessResult {
         }
     }
 
-    for (pos, _piece) in guess.pieces() {
+    for (pos, _piece) in guess.pieces().iter().enumerate() {
         if used_guess_pieces.contains(&pos) {
             continue;
         }
