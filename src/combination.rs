@@ -3,7 +3,7 @@ use std::cmp::PartialEq;
 use std::collections::HashSet;
 use std::iter::FromIterator;
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub struct Combination {
     values: Vec<u8>,
 }
