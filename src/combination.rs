@@ -5,7 +5,7 @@ use std::iter::FromIterator;
 
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct Combination {
-    values: Vec<u8>,
+    pieces: Vec<u8>,
 }
 
 impl Combination {
@@ -14,14 +14,14 @@ impl Combination {
     }
 
     pub fn len(&self) -> usize {
-        self.values.len()
+        self.pieces.len()
     }
 
     pub fn distinct_len(&self) -> usize {
         let mut pieces_set = HashSet::new();
         let mut count = 0;
 
-        for piece in &self.values {
+        for piece in &self.pieces {
             if !pieces_set.contains(&piece) {
                 count += 1;
                 pieces_set.insert(piece);
@@ -32,11 +32,11 @@ impl Combination {
     }
 
     pub fn pieces(&self) -> std::iter::Enumerate<std::slice::Iter<u8>> {
-        self.values.iter().enumerate()
+        self.pieces.iter().enumerate()
     }
 
     pub fn piece(&self, pos: usize) -> u8 {
-        self.values[pos]
+        self.pieces[pos]
     }
 
     pub fn position(&self, searched_piece: &u8, ignored_pos: &HashSet<usize>) -> Option<usize> {
@@ -57,7 +57,7 @@ impl Combination {
 impl FromIterator<u8> for Combination {
     fn from_iter<I: IntoIterator<Item = u8>>(iter: I) -> Self {
         Combination {
-            values: Vec::from_iter(iter),
+            pieces: Vec::from_iter(iter),
         }
     }
 }
@@ -71,7 +71,7 @@ mod tests {
         let pieces = vec![1, 2, 3];
         let combination: Combination = pieces.clone().into_iter().collect();
 
-        assert_eq!(combination.values, pieces);
+        assert_eq!(combination.pieces, pieces);
     }
 
     #[test]
@@ -79,7 +79,7 @@ mod tests {
         let pieces = [1, 2, 3];
         let combination = Combination::from_slice(&pieces);
 
-        assert_eq!(combination.values, pieces);
+        assert_eq!(combination.pieces, pieces);
     }
 
     #[test]
