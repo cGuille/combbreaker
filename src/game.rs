@@ -16,7 +16,7 @@ impl Game {
         Game::default()
     }
 
-    pub fn define_combination(&mut self, combination: Combination) -> Result<(), String> {
+    pub fn set_combination(&mut self, combination: Combination) -> Result<(), String> {
         if self.combination.is_some() {
             return Err("Combination already defined".to_string());
         }
@@ -97,7 +97,7 @@ mod tests {
 
         assert!(!game.ended());
 
-        game.define_combination(Combination::from_slice(&[1, 2, 3, 4]))?;
+        game.set_combination(Combination::from_slice(&[1, 2, 3, 4]))?;
         assert!(!game.ended());
 
         let result = game.guess(&Combination::from_slice(&[1, 1, 1, 1]))?;
