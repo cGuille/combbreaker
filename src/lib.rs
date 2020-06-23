@@ -5,6 +5,7 @@ mod ruleset;
 
 pub use combination::Combination;
 pub use game::Game;
+pub use ruleset::RuleSet;
 
 #[cfg(test)]
 mod tests {

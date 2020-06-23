@@ -16,6 +16,14 @@ impl Game {
         Game::default()
     }
 
+    pub fn ruleset(&self) -> &RuleSet {
+        &self.ruleset
+    }
+
+    pub fn remaining_guesses(&self) -> u8 {
+        self.ruleset.max_tries - self.guess_count
+    }
+
     pub fn combination(&self) -> &Option<Combination> {
         &self.combination
     }
